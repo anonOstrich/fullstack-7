@@ -4,13 +4,20 @@ import {
   Route, Link
 } from 'react-router-dom'
 
-const Menu = () => (
-  <div>    
-    <a href='#'>anecdotes</a>&nbsp;
-    <a href='#'>create new</a>&nbsp;
-    <a href='#'>about</a>&nbsp;
-  </div>
-)
+const Menu = () => {
+  const padding = {
+    padding: 5
+  }
+
+
+  return(
+  <div> 
+
+    <Link style={padding} to="/">anecdotes</Link>&nbsp;
+    <Link style={padding} to="/create">create new</Link>&nbsp;
+    <Link style={padding} to="/about">about</Link>&nbsp;
+  </div>)
+}
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -114,6 +121,10 @@ const App = () => {
   }])
   const [notification, setNotification] = useState('')
 
+  const padding = {
+    padding: 5
+  }
+
   
 
   const addNew = (anecdote) => {
@@ -139,14 +150,16 @@ const App = () => {
 
 
     return (
+      <Router>
       <div>
         <h1>Software anecdotes</h1>
           <Menu />
-          <AnecdoteList anecdotes={anecdotes} />
-          <About />      
-          <CreateNew addNew={addNew}/>
+          <Route exact path="/" render={() => <AnecdoteList anecdotes={anecdotes} />} />
+          <Route exact path="/create" render={() => <CreateNew addNew={addNew} />}/>
+          <Route exact path="/about" render={() => <About />} />
         <Footer />
       </div>
+      </Router>
     );
   
 }
