@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
-  BrowserRouter as Router,
-  Route, Link
+  Route, Link, withRouter
 } from 'react-router-dom'
 
 const Menu = () => {
@@ -19,11 +18,25 @@ const Menu = () => {
   </div>)
 }
 
+const AnecdoteVerbose = ({ anecdote }) => {
+  return(<div>
+    <h2>{ anecdote.content } by { anecdote.author }</h2>
+    has { anecdote.votes } votes <br />
+    for more info see <a href={anecdote.info}>{ anecdote.info }</a> <br/>
+  </div>)
+}
+
+const Anecdote = ({ anecdote }) => (<li>
+<Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
+</li>)
+
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
+      {anecdotes.map(anecdote => (<li>
+      <Anecdote key={anecdote.id} anecdote={anecdote} />
+      </li>))}
     </ul>  
   </div>
 )
@@ -104,7 +117,13 @@ const  CreateNew = (props) => {
   
 }
 
-const App = () => {
+const Notification = ({notification}) => {
+  return(
+    <p>{notification}</p>
+  )
+}
+
+const App = (props) => {
   const [anecdotes, setAnecdotes] = useState([        {
     content: 'If it hurts, do it more often',
     author: 'Jez Humble',
@@ -119,17 +138,19 @@ const App = () => {
     votes: 0,
     id: '2'
   }])
-  const [notification, setNotification] = useState('')
+  const [notification, setNotification] = useState(null)
 
-  const padding = {
-    padding: 5
+  const displayNotificationForSeconds = (message, duration) => {
+    setNotification(message)
+    setTimeout(() => setNotification(null), 1000 * duration)
   }
-
   
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    displayNotificationForSeconds(`a new anecdote ${anecdote.content} created!`, 10)
+    props.history.push("/")
   }
 
   const anecdoteById = (id) =>
@@ -150,18 +171,23 @@ const App = () => {
 
 
     return (
-      <Router>
       <div>
         <h1>Software anecdotes</h1>
           <Menu />
+          {notification ? 
+          <Notification notification={notification}/>
+          : ''}
           <Route exact path="/" render={() => <AnecdoteList anecdotes={anecdotes} />} />
           <Route exact path="/create" render={() => <CreateNew addNew={addNew} />}/>
           <Route exact path="/about" render={() => <About />} />
+          <Route exact path="/anecdotes/:id" render={({match}) => 
+            <AnecdoteVerbose anecdote={anecdoteById(match.params.id)}/>
+          } />
         <Footer />
       </div>
-      </Router>
     );
   
 }
 
-export default App;
+
+export default withRouter(App);
