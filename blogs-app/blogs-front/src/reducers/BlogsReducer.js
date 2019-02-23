@@ -70,7 +70,7 @@ export const likeBlog = (blog) => {
   return async (dispatch) => {
     blog = { ...blog, likes: blog.likes + 1 }
     const result = await blogsService.updateBlog(blog)
-    dispatch(updateBlog(result))
+    dispatch(updateBlog(blog))
   }
 }
 

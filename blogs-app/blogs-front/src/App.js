@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import BlogsView from './components/Views/BlogsView'
+import BlogView from './components/Views/BlogView'
 import UsersView from './components/Views/UsersView'
 import UserView from './components/Views/UserView'
 
@@ -42,12 +43,19 @@ const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
     <div>
     <Notification />
     <LoginInformation />
-    <Route  exact path="/" render={() => <BlogsView />} />
+
+
+    <Route exact path="/" render={() => <Redirect to="/blogs" />}/>
+
+    <Route  exact path="/blogs" render={() => <BlogsView />} />
     <Route  exact path="/users" render={() => <UsersView />}/>
 
     <Route exact path="/users/:id" render={({ match }) =>
       <UserView userId={match.params.id} />
     }/>
+
+    <Route exact path="/blogs/:id" render={({ match }) => 
+      <BlogView blogId={match.params.id}/>}/>
     </div>
     </Router>
   )

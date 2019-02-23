@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { likeBlog, deleteBlog } from '../../reducers/BlogsReducer'
-import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
+const Blog = ({ blog }) => {
 
-  const [verbose, setVerbose] = useState(false)
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -14,27 +12,11 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
     marginBottom: 5
   }
 
-  const showOnVerbose = { display: verbose ? '' : 'none' }
-
-  const toggleVerbosity = () => {
-    setVerbose(!verbose)
-  }
 
   return (
     <div style={blogStyle}>
-      <div onClick={toggleVerbosity} className='blogInfo'>
-        {blog.title} {blog.author}
-        <div>
-          <div style={showOnVerbose} className='extraInfo'>
-            <a href={'http://www.' + blog.url}>{blog.url}</a><br/>
-            {blog.likes} likes <button onClick={() => { likeBlog(blog) }}>like</button> <br/>
-      added by  {blog.user ? blog.user.name : 'unknown'} <br/>
-            {!blog.user || user.username === blog.user.username ?
-              <button onClick={ () => { deleteBlog(blog)}}>remove</button>
-              : <></>
-            }
-          </div>
-        </div>
+      <div >
+        <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link>
       </div>
     </div>
   )}
@@ -43,9 +25,4 @@ Blog.propTypes = {
   blog: PropTypes.object.isRequired
 }
 
-export default connect(state => ({
-  user: state.user
-}), {
-  deleteBlog,
-  likeBlog
-})(Blog)
+export default Blog
