@@ -20,6 +20,9 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
     setVerbose(!verbose)
   }
 
+  console.log('User in props', user)
+  console.log('User of the blog:', blog.user)
+
   return (
     <div style={blogStyle}>
       <div onClick={toggleVerbosity} className='blogInfo'>
@@ -29,7 +32,7 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
             <a href={'http://www.' + blog.url}>{blog.url}</a><br/>
             {blog.likes} likes <button onClick={() => { likeBlog(blog) }}>like</button> <br/>
       added by  {blog.user ? blog.user.name : 'unknown'} <br/>
-            {user === blog.user ?
+            {!blog.user || user.username === blog.user.username ?
               <button onClick={ () => { deleteBlog(blog)}}>remove</button>
               : <></>
             }

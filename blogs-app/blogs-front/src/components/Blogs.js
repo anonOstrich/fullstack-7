@@ -1,10 +1,8 @@
-import React, { useEffect }from 'react'
+import React from 'react'
 import Blog from './Blog'
 import { connect } from 'react-redux'
-import { setInitialBlogs } from '../reducers/BlogsReducer'
 
-const Blogs = ({ blogs, setInitialBlogs }) => {
-  useEffect( () => {setInitialBlogs()}, [])
+const Blogs = ({ blogs }) => {
 
   return(
     blogs.map(blog =>
@@ -19,4 +17,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setInitialBlogs })(Blogs)
+export default connect(mapStateToProps)(Blogs)
