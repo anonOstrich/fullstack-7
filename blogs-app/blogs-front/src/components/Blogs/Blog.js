@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { likeBlog, deleteBlog } from '../reducers/BlogsReducer'
+import { likeBlog, deleteBlog } from '../../reducers/BlogsReducer'
 import { connect } from 'react-redux'
 
 const Blog = ({ blog, user, likeBlog, deleteBlog }) => {

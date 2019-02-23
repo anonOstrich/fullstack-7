@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { logout, setInitialUser } from '../reducers/UserReducer'
+import { logout, setInitialUser } from '../../reducers/UserReducer'
 
 const LoginInformation = ({ user, logout, setInitialUser }) => {
 

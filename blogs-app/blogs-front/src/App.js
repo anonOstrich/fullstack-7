@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { setInitialUser } from './reducers/UserReducer'
 import { setInitialBlogs } from './reducers/BlogsReducer'
 import Togglable from './components/Togglable'
-import BlogForm from './components/BlogForm'
-import Blogs from './components/Blogs'
-import LoginForm from './components/LoginForm'
+import BlogForm from './components/Blogs/BlogForm'
+import Blogs from './components/Blogs/Blogs'
+import LoginForm from './components/Login/LoginForm'
 import Notification from './components/Notification'
-import LoginInformation from './components/LoginInformation'
+import LoginInformation from './components/Login/LoginInformation'
 
 
 const App = ({ setInitialUser, user, setInitialBlogs }) => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useField, excludeReset } from '../hooks/index'
-import { changeNotificationForSeconds } from '../reducers/NotificationReducer'
-import { login } from '../reducers/UserReducer'
+import { useField, excludeReset } from '../../hooks/index'
+import { changeNotificationForSeconds } from '../../reducers/NotificationReducer'
+import { login } from '../../reducers/UserReducer'
 
 const LoginForm = ({ changeNotificationForSeconds, login }) => {
   const usernameField = useField('text')

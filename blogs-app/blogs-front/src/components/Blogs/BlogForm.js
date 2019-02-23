@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useField, excludeReset } from '../hooks/index'
-import { changeNotificationForSeconds } from '../reducers/NotificationReducer'
-import { createBlog } from '../reducers/BlogsReducer'
+import { useField, excludeReset } from '../../hooks/index'
+import { changeNotificationForSeconds } from '../../reducers/NotificationReducer'
+import { createBlog } from '../../reducers/BlogsReducer'
 
 const NoteForm = ({ createBlog, changeNotificationForSeconds }) => {
   const titleField = useField('text')
