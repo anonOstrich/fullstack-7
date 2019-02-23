@@ -20,9 +20,6 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
     setVerbose(!verbose)
   }
 
-  console.log('User in props', user)
-  console.log('User of the blog:', blog.user)
-
   return (
     <div style={blogStyle}>
       <div onClick={toggleVerbosity} className='blogInfo'>

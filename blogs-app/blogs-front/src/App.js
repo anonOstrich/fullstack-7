@@ -5,12 +5,14 @@ import { setInitialBlogs } from './reducers/BlogsReducer'
 import Togglable from './components/Togglable'
 import BlogForm from './components/Blogs/BlogForm'
 import Blogs from './components/Blogs/Blogs'
+import Users from './components/Users/Users'
 import LoginForm from './components/Login/LoginForm'
 import Notification from './components/Notification'
 import LoginInformation from './components/Login/LoginInformation'
+import { setInitialUsers } from './reducers/UsersReducer'
 
 
-const App = ({ setInitialUser, user, setInitialBlogs }) => {
+const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
 
   /*
   Helpointa tehdä tässä - ei varmasti haeta useampaan kertaan
@@ -18,6 +20,7 @@ const App = ({ setInitialUser, user, setInitialBlogs }) => {
   useEffect(setInitialUser
     , [])
   useEffect( () => {setInitialBlogs()}, [])
+  useEffect( () => { setInitialUsers() }, [])
 
 
   if(!user){
@@ -38,10 +41,11 @@ const App = ({ setInitialUser, user, setInitialBlogs }) => {
         <BlogForm />
       </Togglable>
       <Blogs />
+      <Users />
     </div>
   )
 
 
 }
 
-export default connect((state) => ({ user: state.user }), { setInitialUser, setInitialBlogs })(App)
+export default connect((state) => ({ user: state.user }), { setInitialUser, setInitialBlogs, setInitialUsers })(App)
