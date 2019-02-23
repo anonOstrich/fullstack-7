@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useField, excludeReset } from '../hooks/index'
 import blogService from '../services/blogs'
+import { changeNotificationForSeconds } from '../reducers/NotificationReducer'
+import { createNewBlog } from '../reducers/BlogsReducer'
 
-const NoteForm = () => {
+const NoteForm = ({ updateShownBlogs, changeNotificationForSeconds }) => {
   const titleField = useField('text')
   const authorField = useField('text')
   const urlField = useField('text')
@@ -14,15 +16,17 @@ const NoteForm = () => {
     try{
       const result = await blogService.create({
         title: titleField.value,
-         author: authorField.value,
-          url: urlField.value })
+        author: authorField.value,
+        url: urlField.value })
       titleField.reset()
       authorField.reset()
       urlField.reset()
+
+
       updateShownBlogs(result)
-      updateNotification(`a new blog ${result.title} by ${result.author} added`)
+      changeNotificationForSeconds(`a new blog ${result.title} by ${result.author} added`, false , 5)
     } catch(exception){
-      updateNotification('an error occured in creating the blog', true)
+      changeNotificationForSeconds('an error occured in creating the blog', true, 5)
     }
   }
 
@@ -40,8 +44,10 @@ const NoteForm = () => {
   )
 }
 
-const mapStateToProps = (state) => {
 
+
+const mapDispatchToProps = {
+  changeNotificationForSeconds
 }
 
-export default connect()(NoteForm)
+export default connect(null, mapDispatchToProps)(NoteForm)

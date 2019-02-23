@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { likeBlog, deleteBlog } from '../reducers/BlogsReducer'
+import { connect } from 'react-redux'
 
-const Blog = ({ blog, handleLike, handleRemove }) => {
+const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
 
   const [verbose, setVerbose] = useState(false)
-
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -25,11 +26,11 @@ const Blog = ({ blog, handleLike, handleRemove }) => {
         {blog.title} {blog.author}
         <div>
           <div style={showOnVerbose} className='extraInfo'>
-            <a href={"http://www." + blog.url}>{blog.url}</a><br/>
-            {blog.likes} likes <button onClick={handleLike}>like</button> <br/>
+            <a href={'http://www.' + blog.url}>{blog.url}</a><br/>
+            {blog.likes} likes <button onClick={() => { likeBlog(blog) }}>like</button> <br/>
       added by  {blog.user ? blog.user.name : 'unknown'} <br/>
-            {handleRemove ?
-              <button onClick={handleRemove}>remove</button>
+            {user === blog.user ?
+              <button onClick={ () => { deleteBlog(blog)}}>remove</button>
               : <></>
             }
           </div>
@@ -39,8 +40,12 @@ const Blog = ({ blog, handleLike, handleRemove }) => {
   )}
 
 Blog.propTypes = {
-  handleLike: PropTypes.func.isRequired,
   blog: PropTypes.object.isRequired
 }
 
-export default Blog
+export default connect(state => ({
+  user: state.user
+}), {
+  deleteBlog,
+  likeBlog
+})(Blog)
