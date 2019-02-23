@@ -1,6 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import User from './User'
+import { Link } from 'react-router-dom'
+
+
+
+const User = ({ user }) => {
+  return(
+    <>
+    <td><Link to={`/users/${user.id}`}>{ user.name }</Link></td>
+    <td>{ user.blogs.length }</td>
+    </>
+  )
+}
+
 
 const Users = ({ users }) => {
   return (

@@ -1,15 +1,20 @@
 import React, { useEffect } from 'react'
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import BlogsView from './components/Views/BlogsView'
+import UsersView from './components/Views/UsersView'
+import UserView from './components/Views/UserView'
+
 import { setInitialUser } from './reducers/UserReducer'
 import { setInitialBlogs } from './reducers/BlogsReducer'
-import Togglable from './components/Togglable'
-import BlogForm from './components/Blogs/BlogForm'
-import Blogs from './components/Blogs/Blogs'
-import Users from './components/Users/Users'
+import { setInitialUsers } from './reducers/UsersReducer'
+
 import LoginForm from './components/Login/LoginForm'
 import Notification from './components/Notification'
 import LoginInformation from './components/Login/LoginInformation'
-import { setInitialUsers } from './reducers/UsersReducer'
+
 
 
 const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
@@ -33,16 +38,18 @@ const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
   }
 
   return (
+    <Router>
     <div>
-      <h2>blogs</h2>
-      <Notification />
-      <LoginInformation />
-      <Togglable buttonLabel="lisää blogi">
-        <BlogForm />
-      </Togglable>
-      <Blogs />
-      <Users />
+    <Notification />
+    <LoginInformation />
+    <Route  exact path="/" render={() => <BlogsView />} />
+    <Route  exact path="/users" render={() => <UsersView />}/>
+
+    <Route exact path="/users/:id" render={({ match }) =>
+      <UserView userId={match.params.id} />
+    }/>
     </div>
+    </Router>
   )
 
 
