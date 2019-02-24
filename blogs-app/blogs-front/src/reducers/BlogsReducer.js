@@ -89,5 +89,11 @@ export const fetchCommentsForBlog = (blog) => async dispatch => {
   dispatch(updateBlog(newBlog))
 }
 
+export const addCommentForBlog = (blog, content) => async dispatch => {
+  const added = await commentService.createCommentForBlog(blog, content)
+  const newBlog = { ...blog, comments: [added].concat(blog.comments) }
+  dispatch(updateBlog(newBlog))
+}
+
 
 export default BlogsReducer

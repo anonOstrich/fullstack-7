@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { deleteBlog, likeBlog} from '../../reducers/BlogsReducer'
 import Comments from '../Comments/Comments'
+import CommentForm from '../Comments/CommentForm'
 
 const BlogInfo = ({ blogId, blog, likeBlog, deleteBlog, user}) => {
 
@@ -20,7 +21,8 @@ const BlogInfo = ({ blogId, blog, likeBlog, deleteBlog, user}) => {
               <button onClick={ () => { deleteBlog(blog)} }>remove</button>
               : <></>
             }
-
+       <h3>comments</h3>
+       <CommentForm blogId={ blogId } />
        <Comments blogId={ blogId }/>
     </div>
   )

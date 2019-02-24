@@ -7,7 +7,6 @@ const Comments = ({ blogId, blog, fetchCommentsForBlog }) => {
   useEffect(() => { fetchCommentsForBlog(blog) }, [])
 
   return(<div>
-    <h3>comments</h3>
     <ul>
       {blog.comments && blog.comments.map(comment => (<li key={comment.id}>{ comment.content }</li>)) }
     </ul>
