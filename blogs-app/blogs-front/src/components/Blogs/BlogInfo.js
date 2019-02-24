@@ -1,8 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteBlog, likeBlog } from '../../reducers/BlogsReducer'
+import { Redirect } from 'react-router-dom'
+import { deleteBlog, likeBlog} from '../../reducers/BlogsReducer'
+import Comments from '../Comments/Comments'
 
-const BlogInfo = ({ blog = undefined, likeBlog, deleteBlog, user }) => {
+const BlogInfo = ({ blogId, blog, likeBlog, deleteBlog, user}) => {
+
+  if(!blog)
+    return <Redirect to="/blogs" />
+
 
   return(
     <div>
@@ -14,10 +20,12 @@ const BlogInfo = ({ blog = undefined, likeBlog, deleteBlog, user }) => {
               <button onClick={ () => { deleteBlog(blog)} }>remove</button>
               : <></>
             }
+
+       <Comments blogId={ blogId }/>
     </div>
   )
 }
 
-export default connect(state => ({ user: state.user }), {
+export default connect((state, ownProps) => ({ user: state.user, blog: state.blogs.find(b => b.id === ownProps.blogId) }), {
   likeBlog, deleteBlog
 })(BlogInfo)

@@ -1,4 +1,5 @@
 import blogsService from '../services/blogs'
+import commentService from '../services/comments'
 
 const sortBlogs = (toBeSorted) =>  toBeSorted.slice().sort((blogA, blogB) => blogB.likes - blogA.likes)
 
@@ -79,6 +80,13 @@ export const setInitialBlogs = () => {
     const blogs = await blogsService.getAll()
     dispatch(createBlogs(blogs))
   }
+}
+
+
+export const fetchCommentsForBlog = (blog) => async dispatch => {
+  const comments = await commentService.getCommentsForBlog(blog)
+  const newBlog = { ...blog, comments: comments }
+  dispatch(updateBlog(newBlog))
 }
 
 

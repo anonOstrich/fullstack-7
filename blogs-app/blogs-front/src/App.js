@@ -23,9 +23,9 @@ const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
   /*
   Helpointa tehdä tässä - ei varmasti haeta useampaan kertaan
   */
+ useEffect( () => {setInitialBlogs()}, [])
   useEffect(setInitialUser
     , [])
-  useEffect( () => {setInitialBlogs()}, [])
   useEffect( () => { setInitialUsers() }, [])
 
 
