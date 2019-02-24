@@ -6,10 +6,10 @@ const LoginInformation = ({ user, logout, setInitialUser }) => {
 
   useEffect(setInitialUser, [])
 
-  return(<div>
-    <p>{user.name} logged in</p>
+  return(<>
+    {user.name} logged in{' '}
     <button onClick={() => logout()}>logout</button>
-  </div>)
+  </>)
 }
 
 export default connect(state => ({

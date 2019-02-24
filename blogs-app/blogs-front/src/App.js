@@ -7,6 +7,7 @@ import BlogsView from './components/Views/BlogsView'
 import BlogView from './components/Views/BlogView'
 import UsersView from './components/Views/UsersView'
 import UserView from './components/Views/UserView'
+import NavBar from './components/NavBar'
 
 import { setInitialUser } from './reducers/UserReducer'
 import { setInitialBlogs } from './reducers/BlogsReducer'
@@ -14,7 +15,6 @@ import { setInitialUsers } from './reducers/UsersReducer'
 
 import LoginForm from './components/Login/LoginForm'
 import Notification from './components/Notification'
-import LoginInformation from './components/Login/LoginInformation'
 
 
 
@@ -42,8 +42,7 @@ const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
     <Router>
     <div>
     <Notification />
-    <LoginInformation />
-
+    <NavBar />
 
     <Route exact path="/" render={() => <Redirect to="/blogs" />}/>
 
