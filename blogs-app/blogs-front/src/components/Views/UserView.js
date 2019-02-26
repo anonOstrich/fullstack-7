@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import UserInfo from '../Users/UserInfo'
+import Container from 'react-bootstrap/Container'
 
 
 const UserView = ({ userId, user }) => {
@@ -9,7 +10,9 @@ const UserView = ({ userId, user }) => {
     return <></>
 
   return(
-    <UserInfo user={ user }/>
+    <Container>
+          <UserInfo user={ user }/>
+    </Container>
   )}
 
 export default connect((state, ownProps) => ({

@@ -1,16 +1,18 @@
 import React from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Container from 'react-bootstrap/Container'
 
 const UserInfo = ({ user }) => {
   return(
-    <div>
+    <Container>
       <h2>{ user.name }</h2>
       <strong>added blogs</strong>
-      <ul>
-        { user.blogs.map(blog => (
-          <li key={ blog.id }>{ blog.title }</li>
+      <ListGroup>
+      { user.blogs.map(blog => (
+          <ListGroup.Item key={ blog.id }>{ blog.title }</ListGroup.Item>
         ))}
-      </ul>
-    </div>
+      </ListGroup>
+    </Container>
   )
 }
 

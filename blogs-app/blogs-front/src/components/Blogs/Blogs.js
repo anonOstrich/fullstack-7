@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListGroup, Row, Col } from 'react-bootstrap'
+import { ListGroup, Row, Col, Container } from 'react-bootstrap'
 
 import Blog from './Blog'
 import { connect } from 'react-redux'
@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 const Blogs = ({ blogs }) => {
 
   return(
+    <Container>
     <ListGroup>
     { blogs.map(
     blog => 
@@ -20,6 +21,7 @@ const Blogs = ({ blogs }) => {
     ) }
 
   </ListGroup>
+  </Container>
   )
 }
 

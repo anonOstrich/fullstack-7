@@ -1,24 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Alert } from 'react-bootstrap'
 
 const Notification = ({ message, isError }) => {
-  const notificationStyle = {
-    color: isError ? 'red' : 'green',
-    background: 'lightgrey',
-    fontSize: 20,
-    borderStyle: 'solid',
-    borderRadius: 5,
-    padding: 5,
-    marginBottom: 5
-  }
 
   if(!message)
     return <></>
 
   return (
-    <div style={notificationStyle}>
+    <Alert variant={ isError ? 'danger' : 'success' }>
       <p>{message}</p>
-    </div>
+      </Alert>
   )
 }
 
