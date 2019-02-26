@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 
+import Container from 'react-bootstrap/Container'
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -7,7 +9,7 @@ import BlogsView from './components/Views/BlogsView'
 import BlogView from './components/Views/BlogView'
 import UsersView from './components/Views/UsersView'
 import UserView from './components/Views/UserView'
-import NavBar from './components/NavBar'
+import NavigationBar from './components/NavigationBar'
 
 import { setInitialUser } from './reducers/UserReducer'
 import { setInitialBlogs } from './reducers/BlogsReducer'
@@ -30,20 +32,21 @@ const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
 
 
   if(!user){
-    return(<>
+    return(<Container>
         <h2>Log in to application</h2>
         <Notification />
         <LoginForm />
-        </>
+        </Container>
     )
   }
 
   return (
     <Router>
-    <div>
+    
+    <Container>
     <Notification />
-    <NavBar />
-
+    <NavigationBar />
+    
     <Route exact path="/" render={() => <Redirect to="/blogs" />}/>
 
     <Route  exact path="/blogs" render={() => <BlogsView />} />
@@ -55,7 +58,7 @@ const App = ({ setInitialUser, user, setInitialBlogs, setInitialUsers }) => {
 
     <Route exact path="/blogs/:id" render={({ match }) => 
       <BlogView blogId={match.params.id}/>}/>
-    </div>
+    </Container>
     </Router>
   )
 

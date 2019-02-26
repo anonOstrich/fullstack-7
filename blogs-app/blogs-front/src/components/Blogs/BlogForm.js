@@ -1,8 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
+import Form from 'react-bootstrap/Form'
+
 import { useField, excludeReset } from '../../hooks/index'
 import { changeNotificationForSeconds } from '../../reducers/NotificationReducer'
 import { createBlog } from '../../reducers/BlogsReducer'
+import Button from 'react-bootstrap/Button'
 
 const NoteForm = ({ createBlog, changeNotificationForSeconds }) => {
   const titleField = useField('text')
@@ -31,15 +35,24 @@ const NoteForm = ({ createBlog, changeNotificationForSeconds }) => {
 
 
   return (
-    <div>
-      <h2>Create new</h2>
-      <form onSubmit={handleCreateBlog}>
-        title <input {...excludeReset(titleField)}/><br />
-        author <input { ...excludeReset(authorField) }/><br />
-        url <input {...excludeReset(urlField)}/><br />
-        <button type="submit">create</button>
-      </form>
-    </div>
+    <>
+    <h2>Create new</h2>
+    <Form onSubmit={handleCreateBlog}>
+    <Form.Group>
+      <Form.Label>Title</Form.Label>
+      <Form.Control {...excludeReset(titleField)} />   
+    </Form.Group>
+    <Form.Group>
+      <Form.Label>Author</Form.Label>
+      <Form.Control { ...excludeReset(authorField)} />
+    </Form.Group>
+    <Form.Group>
+      <Form.Label>Url</Form.Label>
+      <Form.Control {...excludeReset(urlField)} />
+    </Form.Group>
+    <Button variant="primary" type="submit">create</Button>
+    </Form>
+  </>
   )
 }
 

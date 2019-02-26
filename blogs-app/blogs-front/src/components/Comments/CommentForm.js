@@ -1,5 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 import { useField, excludeReset } from '../../hooks/index'
 import { addCommentForBlog } from '../../reducers/BlogsReducer'
 
@@ -13,12 +16,18 @@ const CommentForm = ({ blogId, blog, addCommentForBlog }) => {
   }
 
   return(
-    <form onSubmit={handleSubmit}>
-      <input { ...excludeReset(commentField) }/>
-      <button type="submit">
-        add comment
-      </button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+    
+    <Form.Row>
+      <Col>
+      <Form.Control { ...excludeReset(commentField) }></Form.Control>
+      </Col>
+      <Col>
+      <Button type="submit">add comment</Button>
+      </Col>
+    </Form.Row>
+    </Form>
+
   )
 
 }

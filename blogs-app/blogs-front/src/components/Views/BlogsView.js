@@ -1,6 +1,4 @@
 import React from 'react'
-import Notification from '../Notification'
-import LoginInformation from '../Login/LoginInformation'
 import Togglable from '../Togglable'
 import BlogForm from '../Blogs/BlogForm'
 import Blogs from '../Blogs/Blogs'

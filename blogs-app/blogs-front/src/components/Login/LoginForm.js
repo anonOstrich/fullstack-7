@@ -1,5 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 import { useField, excludeReset } from '../../hooks/index'
 import { changeNotificationForSeconds } from '../../reducers/NotificationReducer'
 import { login } from '../../reducers/UserReducer'
@@ -21,13 +24,23 @@ const LoginForm = ({ changeNotificationForSeconds, login }) => {
   }
 
   return (
-  <div>
-  <form onSubmit={handleLogin}>
-    käyttäjätunnus <input {...excludeReset(usernameField)}/> <br />
-    salasana <input {...excludeReset(passwordField)}/>
-      <button type="submit">kirjaudu</button>
-    </form>
-  </div>)
+  <Form onSubmit={ handleLogin }>
+  <Form.Group>
+    <Form.Label>
+      käyttäjätunnus
+    </Form.Label>
+    <Form.Control {...excludeReset(usernameField)} />
+  </Form.Group>
+
+  <Form.Group>
+    <Form.Label>
+      salasana
+    </Form.Label>
+    <Form.Control {...excludeReset(passwordField)}/>
+
+  </Form.Group>
+  <Button type="submit">kirjaudu</Button>
+  </Form>)
 }
 
 export default connect(null, {

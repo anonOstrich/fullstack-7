@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Table from 'react-bootstrap/Table'
 
 
 
@@ -18,11 +19,11 @@ const Users = ({ users }) => {
   return (
     <div>
     <h2>Users</h2>
-    <table>
+    <Table bordered>
       <thead>
         <tr>
-          <td></td>
-          <td style = { { fontWeight: 'bold' } }>blogs created</td>
+          <th>name</th>
+          <th>blogs created</th>
         </tr>
       </thead>
       <tbody>
@@ -34,7 +35,7 @@ const Users = ({ users }) => {
         )
       })}
       </tbody>
-    </table>
+    </Table>
     </div>
   )
 }

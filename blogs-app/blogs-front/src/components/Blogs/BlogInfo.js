@@ -1,30 +1,56 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { deleteBlog, likeBlog} from '../../reducers/BlogsReducer'
+import { FaThumbsUp } from 'react-icons/fa'
+
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import { deleteBlog, likeBlog } from '../../reducers/BlogsReducer'
 import Comments from '../Comments/Comments'
 import CommentForm from '../Comments/CommentForm'
 
-const BlogInfo = ({ blogId, blog, likeBlog, deleteBlog, user}) => {
+const BlogInfo = ({ blogId, blog, likeBlog, deleteBlog, user }) => {
 
   if(!blog)
     return <Redirect to="/blogs" />
 
 
   return(
-    <div>
-      <h2>{`${blog.title} ${blog.author}`}</h2>
-      <a href={'http://www.' + blog.url}>{blog.url}</a><br/>
-      {blog.likes} likes <button onClick={() => { likeBlog(blog) }}>like</button> <br/>
-      added by  {blog.user ? blog.user.name : 'unknown'} <br/>
+    <Container>
+    <Row>
+      <Col>
+        <h2>{blog.title + ' ' + blog.author}</h2>
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+      <a href={'http://www.' + blog.url}>{blog.url}</a>
+      </Col>
+    </Row>
+    <Row>
+      <Col md="auto">
+      {blog.likes} likes
+      </Col>
+      <Col>
+      <FaThumbsUp  onClick={() => { likeBlog(blog) }}/>
+      {' ' + 'like the blog!'}
+      </Col>
+    </Row>
+    <Row>
+      <Col md="auto">
+      added by  {blog.user ? blog.user.name : 'unknown'}
+      </Col>
+      <Col>
       {!blog.user || user.username === blog.user.username ?
-              <button onClick={ () => { deleteBlog(blog)} }>remove</button>
-              : <></>
-            }
+              <Button size="sm" variant="danger" onClick={ () => { deleteBlog(blog)} }>remove</Button>
+              : <></>}
+      </Col>
+    </Row>
+
+      
        <h3>comments</h3>
        <CommentForm blogId={ blogId } />
        <Comments blogId={ blogId }/>
-    </div>
+    </Container>
   )
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
 import { connect } from 'react-redux'
 import { fetchCommentsForBlog } from '../../reducers/BlogsReducer'
 
@@ -6,11 +7,10 @@ const Comments = ({ blogId, blog, fetchCommentsForBlog }) => {
 
   useEffect(() => { fetchCommentsForBlog(blog) }, [])
 
-  return(<div>
-    <ul>
-      {blog.comments && blog.comments.map(comment => (<li key={comment.id}>{ comment.content }</li>)) }
-    </ul>
-  </div>)
+  return(
+  <ListGroup flush>
+      {blog.comments && blog.comments.map(comment => (<ListGroup.Item key={comment.id}>{ comment.content }</ListGroup.Item>)) }
+    </ListGroup>)
 }
 
 export default connect((state, ownProps) => ({

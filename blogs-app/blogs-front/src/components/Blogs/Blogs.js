@@ -1,14 +1,26 @@
 import React from 'react'
+import { ListGroup, Row, Col } from 'react-bootstrap'
+
 import Blog from './Blog'
 import { connect } from 'react-redux'
 
 const Blogs = ({ blogs }) => {
 
   return(
-    blogs.map(blog =>
+    <ListGroup>
+    { blogs.map(
+    blog => 
+    (
+    <ListGroup.Item variant="primary" as="a">
     <Blog key={blog.id}
       blog={blog} />
-  ))
+    </ListGroup.Item>
+    )
+
+    ) }
+
+  </ListGroup>
+  )
 }
 
 const mapStateToProps = (state) => {
